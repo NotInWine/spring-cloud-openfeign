@@ -225,6 +225,10 @@ class FeignClientsRegistrar
 	private void registerFeignClient(BeanDefinitionRegistry registry,
 			AnnotationMetadata annotationMetadata, Map<String, Object> attributes) {
 		String className = annotationMetadata.getClassName();
+		// 划重点 FeignClientFactoryBean 是一个工厂Bean
+		// 实现了org.springframework.beans.factory.FactoryBean
+		// FactoryBean 是初始化Bean的工厂
+		// spring 会调用 FactoryBean.getObject() 获取实例
 		BeanDefinitionBuilder definition = BeanDefinitionBuilder
 				.genericBeanDefinition(FeignClientFactoryBean.class);
 		validate(attributes);
